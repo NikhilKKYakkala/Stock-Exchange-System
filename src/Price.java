@@ -1,3 +1,4 @@
+import java.text.NumberFormat;
 
 public class Price implements Comparable<Price>{
     private final int price;
@@ -56,14 +57,15 @@ public class Price implements Comparable<Price>{
 
     @Override
     public int compareTo(Price p) {
+        if(p == null)
+            System.out.println("Price Object passed to compare cannot be null");
         return price - p.price;
     }
 
     @Override
     public String toString() {
-        return "Price{" +
-                "price=$" + price/100 + '.' + Math.abs(price%100) +
-                '}';
+        NumberFormat nf = NumberFormat.getInstance();
+        return "$" + nf.format(price/100) + '.' + Math.abs(price%100);
     }
 
     @Override
