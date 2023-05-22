@@ -16,7 +16,7 @@ public class PriceFactory {
     }
 
     public static Price makePrice(String stringValueIn){
-        int a = 0;
+        int cents = 0;
         if (stringValueIn.contains("$"))
             stringValueIn = stringValueIn.replace("$", "");
         if (stringValueIn.contains(","))
@@ -28,10 +28,10 @@ public class PriceFactory {
         if (stringValueIn.contains(".")) {
             double d = Double.parseDouble(stringValueIn);
             d = Math.floor(d * 100);
-            a = (int) d;
+            cents = (int) d;
         }
         else
-            a = Integer.parseInt(stringValueIn);
-        return makePrice(a);
+            cents = Integer.parseInt(stringValueIn);
+        return makePrice(cents);
     }
 }

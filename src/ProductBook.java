@@ -32,9 +32,11 @@ public class ProductBook {
     public OrderDTO cancel(BookSide side, String orderId) throws OrderException {
         ProductBookSide bookSide = side == BookSide.BUY ? buySide : sellSide;
         OrderDTO orderDTO = bookSide.cancel(orderId);
-        if(bookSide.equals(buySide)) tempside = "BUY";
-        else tempside = "SELL";
-        System.out.println(String.format("CANCEL: %s Order: %s Cxl Qty: %s",tempside,orderId,orderDTO.cancelledVolume));
+        if(orderDTO != null) {
+            if (bookSide.equals(buySide)) tempside = "BUY";
+            else tempside = "SELL";
+            System.out.println(String.format("CANCEL: %s Order: %s Cxl Qty: %s", tempside, orderId, orderDTO.cancelledVolume));
+        }
         return orderDTO;
     }
 
