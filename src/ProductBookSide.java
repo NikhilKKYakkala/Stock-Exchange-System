@@ -83,11 +83,16 @@ public class ProductBookSide {
                     System.out.println(output.append(first_order));
                     remainingVol -= first_order.getRemainingVolume();
                     output.delete(0,output.length());
+                    OrderDTO orderDTO = first_order.makeTradableDTO();
+                    UserManager.getInstance().addToUser(first_order.getUser(), orderDTO);
+
                 } else {
                     first_order.setFilledVolume(first_order.getFilledVolume() + remainingVol);
                     first_order.setRemainingVolume(first_order.getRemainingVolume() - remainingVol);
                     remainingVol = 0;
                     System.out.println(output.append(String.format("   PARTIAL FILL: (%s %s) %s" ,side,first_order.getFilledVolume(),first_order)));
+                    OrderDTO orderDTO = first_order.makeTradableDTO();
+                    UserManager.getInstance().addToUser(first_order.getUser(), orderDTO);
                 }
             }
         }
