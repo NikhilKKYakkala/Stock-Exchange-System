@@ -24,7 +24,7 @@ public class ProductBook {
         OrderDTO orderDTO = bookSide.add(o);
         if(bookSide.equals(buySide)) tempside = "BUY";
         else tempside = "SELL";
-        System.out.println(String.format("ADD: %s: %s",tempside,o.toString()));
+        System.out.println(String.format("ADD: %s: %s",tempside,o));
         tryTrade();
         return orderDTO;
     }

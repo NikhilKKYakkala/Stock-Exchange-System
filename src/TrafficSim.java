@@ -21,7 +21,7 @@ public class TrafficSim {
         basePrices.put("TSLA",196.81);
 
         for(int i=0;i<num_users;i++) {
-            System.out.println(""+ (i+1) +") ");
+            System.out.print((i+1) +") ");
             User user = userManager.getRandomUser();
             if(Math.random() < 0.9) {
                 String product = productManager.getRandomProduct();
@@ -44,9 +44,9 @@ public class TrafficSim {
             }
         }
         System.out.println("-------------------------------------------------------------------------------------------\nProductBooks: \n");
-        System.out.println(productManager.toString());
+        System.out.println(productManager);
         System.out.println("-------------------------------------------------------------------------------------------\nUsers: \n");
-        System.out.println(userManager.toString());
+        System.out.println(userManager);
     }
 
     public static Price getPrice(String symbol, BookSide side) {

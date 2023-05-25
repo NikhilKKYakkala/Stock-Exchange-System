@@ -11,11 +11,6 @@ public class Order {
     private int filledVolume;
 
     public Order(String user, String product, Price price, int originalVolume, BookSide side) throws OrderException {
-
-//        validateUser(user);
-//        validateProduct(product);
-//        validatePrice(price);
-//        validateOriginalVolume(originalVolume);
         
         this.user = validateUser(user);
         this.product = validateProduct(product);
@@ -117,7 +112,7 @@ public class Order {
     @Override
     public String toString() {
         return String.format("%s order: %s %s at %s, Orig Vol: %d, Rem Vol: %d, Fill Vol: %d, CXL Vol: %d, ID: %s"
-                ,user,side,product,price,originalVolume,remainingVolume,filledVolume,cancelledVolume,id);
+                ,getUser(),getSide(),getProduct(),getPrice(),getOriginalVolume(),getRemainingVolume(),getFilledVolume(),getCancelledVolume(),getId());
     }
 
     public OrderDTO makeTradableDTO() {

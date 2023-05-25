@@ -80,14 +80,14 @@ public class ProductBookSide {
                     first_order.setFilledVolume(first_order.getFilledVolume() + first_order.getRemainingVolume());
                     output.append(String.format("   FILL: (%s %s) ",side,first_order.getRemainingVolume()));
                     first_order.setRemainingVolume(0);
-                    System.out.println(output.append(first_order.toString()));
+                    System.out.println(output.append(first_order));
                     remainingVol -= first_order.getRemainingVolume();
                     output.delete(0,output.length());
                 } else {
                     first_order.setFilledVolume(first_order.getFilledVolume() + remainingVol);
                     first_order.setRemainingVolume(first_order.getRemainingVolume() - remainingVol);
                     remainingVol = 0;
-                    System.out.println(output.append(String.format("   PARTIAL FILL: (%s %s) %s" ,side,first_order.getFilledVolume(),first_order.toString())));
+                    System.out.println(output.append(String.format("   PARTIAL FILL: (%s %s) %s" ,side,first_order.getFilledVolume(),first_order)));
                 }
             }
         }
