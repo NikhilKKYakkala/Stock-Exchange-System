@@ -59,13 +59,21 @@ public class Price implements Comparable<Price>{
     public int compareTo(Price p) {
         if(p == null)
             System.out.println("Price Object passed to compare cannot be null");
-        return price - p.price;
+        System.out.println(this.price + "-----" + p.price);
+        return Math.abs(this.price - p.price);
     }
 
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getInstance();
-        return "$" + nf.format(price/100) + '.' + Math.abs(price%100);
+        if(price < 10)
+                return "$" + nf.format(price / 100) + ".0" + Math.abs(price % 100);
+        else {
+            if (Math.abs(price % 100) < 10)
+                return "$" + nf.format(price / 100) + '.' + Math.abs(price % 100) + '0';
+            else
+                return "$" + nf.format(price / 100) + '.' + Math.abs(price % 100);
+        }
     }
 
     @Override
