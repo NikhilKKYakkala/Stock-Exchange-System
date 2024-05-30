@@ -26,12 +26,12 @@ public class PriceFactory {
             stringValueIn = '-' + stringValueIn;
         }
         if (stringValueIn.contains(".")) {
-            double d = Double.parseDouble(stringValueIn);
-            d = Math.floor(d * 100);
-            cents = (int) d;
+            if(stringValueIn.split("\\.")[1].length() < 2)
+                stringValueIn = stringValueIn.split("\\.")[0] + stringValueIn.split("\\.")[1] + '0';
+            else
+                stringValueIn = stringValueIn.split("\\.")[0] + stringValueIn.split("\\.")[1].substring(0, 2);
         }
-        else
-            cents = Integer.parseInt(stringValueIn);
+        cents = Integer.parseInt(stringValueIn);
         return makePrice(cents);
     }
 }

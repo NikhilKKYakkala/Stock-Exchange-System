@@ -35,6 +35,10 @@ public class UserManager {
             throw new OrderException("User not found");
     }
 
+    public User getUser(String id) {
+        return users.get(id);
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();

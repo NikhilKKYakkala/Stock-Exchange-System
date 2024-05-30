@@ -42,24 +42,42 @@ public class ProductBookSide {
         return null;
     }
 
-    public Price topOfBookPrice(){
-        Price price = null;
-        if(this.side.equals(BookSide.BUY)) {
-            if(!bookEntries.isEmpty())
-                price = Collections.max(bookEntries.keySet());
-        }
-        else if(this.side.equals(BookSide.SELL)){
-            if(!bookEntries.isEmpty())
-                price = Collections.min(bookEntries.keySet());
-        }
-        return price;
+//    public Price topOfBookPrice(){
+//        Price price = null;
+//        TreeMap<Price, ArrayList<Order>> sortedlist = new TreeMap<>();
+//        if(!bookEntries.isEmpty()) {
+//            sortedlist.putAll(bookEntries);
+//            if (this.side.equals(BookSide.BUY)) {
+////                price = Collections.max(bookEntries.keySet());
+//                price = sortedlist.lastKey();
+//                System.out.println("Buyprice: " + price);
+//            } else if (this.side.equals(BookSide.SELL)) {
+////                price = Collections.min(bookEntries.keySet());
+//                price = sortedlist.firstKey();
+//                System.out.println("Sellprice: " + price);
+//            }
+//        }
+//        return price;
+//    }
+
+    public Price topOfBookPrice() {
+        if(bookEntries.isEmpty())
+            return null;
+
+        ArrayList<Price> sorted = new ArrayList<>(bookEntries.keySet());
+        Collections.sort(sorted);
+        if(side == BookSide.BUY)
+            Collections.reverse(sorted);
+        return sorted.get(0);
     }
 
     public int topOfBookVolume(){
         Price price = topOfBookPrice();
         int sum=0;
-        for(Order orders : bookEntries.get(price)){
-            sum += orders.getRemainingVolume();
+        if(price != null) {
+            for (Order orders : bookEntries.get(price)) {
+                sum += orders.getRemainingVolume();
+            }
         }
         return sum;
     }

@@ -26,6 +26,7 @@ public class ProductBook {
         else tempside = "SELL";
         System.out.println(String.format("ADD: %s: %s",tempside,o));
         tryTrade();
+        updateMarket();
         return orderDTO;
     }
 
@@ -37,6 +38,7 @@ public class ProductBook {
             else tempside = "SELL";
             System.out.println(String.format("CANCEL: %s Order: %s Cxl Qty: %s", tempside, orderId, orderDTO.cancelledVolume));
         }
+        updateMarket();
         return orderDTO;
     }
 
@@ -52,6 +54,12 @@ public class ProductBook {
             buyPrice = buySide.topOfBookPrice();
             sellPrice = sellSide.topOfBookPrice();
         }
+    }
+
+    private void updateMarket() {
+        Price buyPrice = buySide.topOfBookPrice();
+        Price sellPrice = sellSide.topOfBookPrice();
+        CurrentMarketTracker.getinstance().updateMarket(product,buyPrice,buySide.topOfBookVolume(),sellPrice,sellSide.topOfBookVolume());
     }
 
     @Override

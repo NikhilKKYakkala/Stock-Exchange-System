@@ -1,9 +1,11 @@
 import java.util.HashMap;
 
-public class User {
+public class User implements CurrentMarketObserver {
 
     private final String userId;
     private HashMap<String, OrderDTO> orders;
+    private HashMap<String, CurrentMarketSide[]> currentMarkets = new HashMap<>();
+
     public User(String userId) throws OrderException {
         this.userId = setUserId(userId);
         this.orders = new HashMap<>();
@@ -39,6 +41,18 @@ public class User {
             if(order.remainingVolume > 0)
                 return order;
         return null;
+    }
+
+    public void updateCurrentMarket(String symbol, CurrentMarketSide buySide, CurrentMarketSide sellSide) {
+        CurrentMarketSide[] cmsArray = {buySide,sellSide};
+        currentMarkets.put(symbol,cmsArray);
+    }
+
+    public String getCurrentMarkets() {
+        StringBuilder output = new StringBuilder();
+        for (String symbol : currentMarkets.keySet())
+            output.append(symbol + "    " + currentMarkets.get(symbol)[0].toString() + " - " + currentMarkets.get(symbol)[1].toString()).append('\n');
+        return output.toString();
     }
 
     @Override
